@@ -1,38 +1,40 @@
+
+
+
 <?php
+// send_mail.php
+
+// Load Composer's autoloader
+require __DIR__ . '/vendor/autoload.php';
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require '../vendor/autoload.php';
+$mail = new PHPMailer(true);
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name          = $_POST['name'];
-    $email         = $_POST['email'];
-    $number        = $_POST['number'];
-    $subject       = $_POST['subject'];
-    $message       = $_POST['message'];
-    $options       = $_POST['options'];
-    $subscribe     = isset($_POST['subscribe']) ? 'Yes' : 'No';
-    $contact_method= $_POST['contact_method'];
+try {
+    // Server settings
+    $mail->isSMTP();
+    $mail->Host       = 'smtp.gmail.com';
+    $mail->SMTPAuth   = true;
+    $mail->Username   = 'vivekmuthal07@gmail.com';      // Replace with your Gmail address
+    $mail->Password   = 'kblc jrei jlfn olog';           // Use an app-specific password if using 2FA
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port       = 587;
 
-    $mail = new PHPMailer(true);
-    try {
-        $mail->isSMTP();
-        $mail->Host       = 'smtp.gmail.com';
-        $mail->SMTPAuth   = true;
-        $mail->Username   = 'vivekmuthal07@gmail.com';
-        $mail->Password   = 'your_app_specific_password'; // Use an app password if using Gmail with 2FA
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+    // Recipients
+    $mail->setFrom('vivekmuthal07@gmail.com', 'Your Name');
+    $mail->addAddress('vivekmuthal07@gmail.com', 'Recipient Name');
 
-        $mail->setFrom($email, $name);
-        $mail->addAddress('vivekmuthal07@gmail.com');
-        $mail->Subject = $subject;
-        $mail->Body    = "Name: $name\nEmail: $email\nNumber: $number\nMessage: $message\nOption: $options\nSubscribe: $subscribe\nPreferred Contact Method: $contact_method";
+    // Content
+    $mail->isHTML(false);
+    $mail->Subject = 'Test Email from PHPMailer';
+    $mail->Body    = "This is a test email sent from PHPMailer via the command line.";
 
-        $mail->send();
-        echo "Message sent successfully!";
-    } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-    }
+    $mail->send();
+    echo "Message sent successfully!" . PHP_EOL;
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}" . PHP_EOL;
 }
 ?>
+
