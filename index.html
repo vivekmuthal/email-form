@@ -10,33 +10,26 @@
 <body>
     <div class="container">
         <h2>Contact Us</h2>
-        <form id="contactForm" action="/send_mail.php" method="post">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <input type="tel" name="number" placeholder="Your Number" required>
-            <input type="text" name="subject" placeholder="Subject" required>
-            <textarea name="message" placeholder="Your Message" required></textarea>
-            
-            <select name="options" required>
-                <option value="">Select an option</option>
-                <option value="Inquiry">Inquiry</option>
-                <option value="Support">Support</option>
-                <option value="Feedback">Feedback</option>
+        <form action="/send_mail.php" method="post">
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="number" placeholder="Number">
+            <input type="text" name="subject" placeholder="Subject">
+            <textarea name="message" placeholder="Your message"></textarea>
+            <select name="options">
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
             </select>
-            
             <label>
-                <input type="checkbox" name="subscribe"> Subscribe to Newsletter
+                <input type="checkbox" name="subscribe"> Subscribe
             </label>
-            
-            <label>
-                <input type="radio" name="contact_method" value="email" required> Email
-            </label>
-            <label>
-                <input type="radio" name="contact_method" value="phone" required> Phone
-            </label>
-            
-            <button type="submit">Send Message</button>
+            <select name="contact_method">
+                <option value="email">Email</option>
+                <option value="phone">Phone</option>
+            </select>
+            <button type="submit">Submit</button>
         </form>
+        
         <p id="response"></p>
     </div>
     <!-- <script src="js/script.js"></script> -->
