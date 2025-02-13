@@ -11,11 +11,11 @@ require __DIR__ . '/vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// Only allow POST requests
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('HTTP/1.1 405 Method Not Allowed');
-    exit('405 Method Not Allowed');
-}
+// // Only allow POST requests
+// if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+//     header('HTTP/1.1 405 Method Not Allowed');
+//     exit('405 Method Not Allowed');
+// }
 
 // Sanitize and validate form inputs
 $name          = htmlspecialchars($_POST['name'] ?? '');
